@@ -1,0 +1,23 @@
+/* frontend/src/components/Store.css */
+.store-container {
+    padding: 20px;
+}
+
+.items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.item-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.item-card button {
+    margin-top: 10px;
+    padding: 5px 10px;
+}

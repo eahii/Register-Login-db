@@ -1,7 +1,17 @@
-// frontend/src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+// Function to validate password strength
+const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    return password.length >= minLength && hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
+};
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -10,15 +20,24 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (password !== confirmPassword) {
             setMessage('Passwords do not match');
             setIsError(true);
             return;
         }
+
+        if (!validatePassword(password)) {
+            setPasswordError('Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.');
+            setIsError(true);
+            return;
+        }
+
         try {
             console.log('Sending registration data:', { username, email, password });
 
@@ -30,6 +49,7 @@ function Register() {
             console.log('Register response:', response.data); // Add this line for debugging
             setMessage('Successfully registered');
             setIsError(false);
+            setPasswordError('');
             setTimeout(() => navigate('/'), 2000); // Redirect to home page after 2 seconds
         } catch (error) {
             console.error('Registration error:', error.response?.data || error.message);
@@ -68,6 +88,7 @@ function Register() {
                 />
                 <button type="submit">Register</button>
             </form>
+            {passwordError && <p className="message error">{passwordError}</p>}
             {message && <p className={isError ? "message error" : "message success"}>{message}</p>}
         </div>
     );

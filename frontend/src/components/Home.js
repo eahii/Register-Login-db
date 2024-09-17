@@ -20,7 +20,7 @@ function Home() {
 
     const fetchProtectedData = async (token) => {
         try {
-            const response = await axios.get('http://localhost:5000/api/protected', {
+            await axios.get('http://localhost:5000/api/protected', {
                 headers: { 'x-access-token': token }
             });
             setMessage('You are now logged in');
@@ -43,7 +43,13 @@ function Home() {
             <h2>Home</h2>
             <p className={isLoggedIn ? "message success" : "message error"}>{message}</p>
             {isLoggedIn ? (
-                <button onClick={handleLogout}>Logout</button>
+                <>
+                    <button onClick={handleLogout}>Logout</button>
+                    {/* Button to enter the store */}
+                    <Link to="/store">
+                        <button>Enter the Store</button>
+                    </Link>
+                </>
             ) : (
                 <div className="auth-buttons">
                     <Link to="/register">
