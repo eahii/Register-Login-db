@@ -31,4 +31,20 @@ router.post('/add', async (req, res) => {
     }
 });
 
+// DELETE route to remove an item by id
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const item = await Item.findByPk(id);
+        if (!item) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+        await item.destroy();
+        res.status(200).json({ message: 'Item deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to delete item', error });
+    }
+});
+
 module.exports = router;

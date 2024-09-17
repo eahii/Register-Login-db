@@ -1,3 +1,4 @@
+// frontend/src/components/Store.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
@@ -20,6 +21,18 @@ function Store() {
         fetchItems();
     }, []);
 
+    // Function to handle item deletion
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/items/${id}`);
+            setItems(items.filter(item => item.id !== id)); // Update local state to remove item
+            alert('Item deleted successfully');
+        } catch (error) {
+            console.error('Error deleting item:', error);
+            alert('Failed to delete item');
+        }
+    };
+
     return (
         <div className="store-container">
             <h2>Store</h2>
@@ -30,6 +43,7 @@ function Store() {
                             <h3>{item.name}</h3>
                             <p>${item.price.toFixed(2)}</p>
                             <button onClick={() => addToCart(item)}>Add to Cart</button>
+                            <button onClick={() => handleDelete(item.id)}>Delete</button> {/* Add delete button */}
                         </div>
                     ))
                 ) : (
