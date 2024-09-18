@@ -8,17 +8,29 @@ nav {
   background-color: #f8f8f8;
   padding: 10px;
   position: fixed;
-  /* Fixed positioning to stick to the top */
   top: 0;
   left: 0;
   width: 100%;
   border-bottom: 1px solid #ddd;
   z-index: 1000;
-  /* Ensure it stays on top of other content */
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* Horizontal layout for the links */
+  justify-content: flex-start;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+  /* Space between links */
 }
 
 nav a {
-  margin: 0 15px;
   text-decoration: none;
   color: #333;
   font-weight: bold;
