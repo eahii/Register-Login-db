@@ -5,6 +5,6 @@
 
 
 to fix: 
-css navbar
-sivu aukeaa valmiiksi kirjautuneena.
-kauppa toimii navigoinnin kautta vaikka olisit kirjautunut ulos.
+css navbar. 
+sivu aukeaa valmiiksi kirjautuneena. 
+kauppa toimii navigoinnin kautta vaikka olisit kirjautunut ulos. 
