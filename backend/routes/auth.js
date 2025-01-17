@@ -1,13 +1,13 @@
-// backend/routes/auth.js
+// Import necessary modules for creating an Express router and handling user authentication
 const express = require('express');
 const User = require('../models/user');
 const { generateToken } = require('../middlewares/auth');
 
 const router = express.Router();
 
-// Register route
+// Register route to create a new user
 router.post('/register', async (req, res) => {
-    console.log('Registration request body:', req.body); // Log incoming request body
+    console.log('Registration request body:', req.body); // Log incoming request body for debugging
     try {
         const { username, email, password } = req.body;
         const existingUser = await User.findOne({ where: { email } });
@@ -23,9 +23,9 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login route
+// Login route to authenticate a user
 router.post('/login', async (req, res) => {
-    console.log('Login request body:', req.body); // Log incoming request body
+    console.log('Login request body:', req.body); // Log incoming request body for debugging
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ where: { username } });
@@ -42,4 +42,4 @@ router.post('/login', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; // Export the router for use in the main server file
