@@ -1,8 +1,8 @@
 import React from 'react';
-import { useCart } from '../context/CartContext'; // Ensure CartContext is correctly set up
+import { useCart } from '../context/CartContext'; // Use CartContext to manage cart state
 
 function Cart() {
-    const { cartItems, removeFromCart } = useCart(); // Access cartItems and removeFromCart from CartContext
+    const { cartItems, removeFromCart } = useCart(); // Access cart items and remove function
 
     return (
         <div>
@@ -12,12 +12,12 @@ function Cart() {
                     {cartItems.map((item) => (
                         <li key={item.id}>
                             {item.name} - ${item.price.toFixed(2)}
-                            <button onClick={() => removeFromCart(item)}>Remove</button>
+                            <button onClick={() => removeFromCart(item)}>Remove</button> {/* Remove item from cart */}
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p>Your cart is empty.</p>
+                <p>Your cart is empty.</p> // Display message if cart is empty
             )}
         </div>
     );

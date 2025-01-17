@@ -27,7 +27,7 @@ function Register() {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            setMessage('Passwords do not match');
+            setMessage('Passwords do not match'); // Check for matching passwords
             setIsError(true);
             return;
         }
@@ -46,7 +46,7 @@ function Register() {
                 email,
                 password
             });
-            console.log('Register response:', response.data); // Add this line for debugging
+            console.log('Register response:', response.data); // Debug log
             setMessage('Successfully registered');
             setIsError(false);
             setPasswordError('');

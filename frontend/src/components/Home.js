@@ -1,4 +1,3 @@
-// frontend/src/components/Home.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -12,9 +11,9 @@ function Home() {
         const token = localStorage.getItem('token');
         if (token) {
             setIsLoggedIn(true);
-            fetchProtectedData(token);
+            fetchProtectedData(token); // Fetch data if user is logged in
         } else {
-            setMessage('You are not logged in');
+            setMessage('You are not logged in'); // Set message if not logged in
         }
     }, []);
 
@@ -23,19 +22,19 @@ function Home() {
             await axios.get('http://localhost:5000/api/protected', {
                 headers: { 'x-access-token': token }
             });
-            setMessage('You are now logged in');
+            setMessage('You are now logged in'); // Update message on successful data fetch
         } catch (error) {
             console.error('Error fetching protected data:', error.response?.data);
-            setMessage('Error fetching data');
+            setMessage('Error fetching data'); // Update message on error
             setIsLoggedIn(false);
-            localStorage.removeItem('token');
+            localStorage.removeItem('token'); // Remove token on error
         }
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('token'); // Remove token on logout
         setIsLoggedIn(false);
-        setMessage('You have been logged out');
+        setMessage('You have been logged out'); // Update message on logout
     };
 
     return (
@@ -45,18 +44,17 @@ function Home() {
             {isLoggedIn ? (
                 <>
                     <button onClick={handleLogout}>Logout</button>
-                    {/* Button to enter the store */}
                     <Link to="/store">
-                        <button>Enter the Store</button>
+                        <button>Enter the Store</button> {/* Navigate to store if logged in */}
                     </Link>
                 </>
             ) : (
                 <div className="auth-buttons">
                     <Link to="/register">
-                        <button>Register</button>
+                        <button>Register</button> {/* Navigate to register page */}
                     </Link>
                     <Link to="/login">
-                        <button>Login</button>
+                        <button>Login</button> {/* Navigate to login page */}
                     </Link>
                 </div>
             )}

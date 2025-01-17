@@ -9,13 +9,14 @@ function AddItem() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // Send a POST request to add a new item to the backend
             const response = await axios.post('http://localhost:5000/api/items/add', { name, price });
-            alert('Item added successfully!');
-            setName('');
-            setPrice('');
+            alert('Item added successfully!'); // Notify the user of success
+            setName(''); // Clear the name input
+            setPrice(''); // Clear the price input
         } catch (error) {
-            console.error('Error adding item:', error);
-            alert('Failed to add item.');
+            console.error('Error adding item:', error); // Log any errors
+            alert('Failed to add item.'); // Notify the user of failure
         }
     };
 
@@ -34,7 +35,7 @@ function AddItem() {
                 <button type="submit">Add Item</button>
             </form>
             <Link to="/">
-                <button>Back to Store</button>
+                <button>Back to Store</button> {/* Navigate back to the store */}
             </Link>
         </div>
     );

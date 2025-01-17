@@ -1,4 +1,3 @@
-// frontend/src/components/Store.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
@@ -12,13 +11,13 @@ function Store() {
         const fetchItems = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/items');
-                setItems(response.data);
+                setItems(response.data); // Set items from the response
             } catch (error) {
-                console.error('Error fetching items:', error);
+                console.error('Error fetching items:', error); // Log any errors
             }
         };
 
-        fetchItems();
+        fetchItems(); // Fetch items on component mount
     }, []);
 
     // Function to handle item deletion
@@ -26,10 +25,10 @@ function Store() {
         try {
             await axios.delete(`http://localhost:5000/api/items/${id}`);
             setItems(items.filter(item => item.id !== id)); // Update local state to remove item
-            alert('Item deleted successfully');
+            alert('Item deleted successfully'); // Notify user of successful deletion
         } catch (error) {
-            console.error('Error deleting item:', error);
-            alert('Failed to delete item');
+            console.error('Error deleting item:', error); // Log any errors
+            alert('Failed to delete item'); // Notify user of failure
         }
     };
 
@@ -42,16 +41,16 @@ function Store() {
                         <div key={item.id} className="item-card">
                             <h3>{item.name}</h3>
                             <p>${item.price.toFixed(2)}</p>
-                            <button onClick={() => addToCart(item)}>Add to Cart</button>
-                            <button onClick={() => handleDelete(item.id)}>Delete</button> {/* Add delete button */}
+                            <button onClick={() => addToCart(item)}>Add to Cart</button> {/* Add item to cart */}
+                            <button onClick={() => handleDelete(item.id)}>Delete</button> {/* Delete item */}
                         </div>
                     ))
                 ) : (
-                    <p>No items available for sale</p>
+                    <p>No items available for sale</p> // Display message if no items
                 )}
             </div>
             <Link to="/add-item">
-                <button>Add New Item</button>
+                <button>Add New Item</button> {/* Navigate to add item page */}
             </Link>
         </div>
     );

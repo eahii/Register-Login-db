@@ -1,4 +1,3 @@
-// frontend/src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Register from './components/Register';
@@ -12,7 +11,7 @@ import './App.css'; // Ensure CSS is imported
 
 function App() {
   return (
-    <CartProvider>
+    <CartProvider> {/* Provide cart context to the entire app */}
       <Router>
         <div className="App">
           <nav>
